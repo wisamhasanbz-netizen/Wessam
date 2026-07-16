@@ -1,0 +1,36 @@
+<meta name='viewport' content='width=device-width, initial-scale=1'/><!DOCTYPE html>
+<html dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>جرد سريع</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; text-align: center; }
+        input { width: 100%; padding: 20px; font-size: 24px; border: 4px solid #28a745; border-radius: 10px; }
+        .res { font-size: 22px; margin-top: 20px; padding: 20px; background: #e8f5e9; border-radius: 10px; border: 1px solid #c8e6c9; }
+    </style>
+</head>
+<body>
+    <h3>ضع مؤشر الماوس في المربع واعمل لصق</h3>
+    <input type="text" id="barcodeInput" placeholder="الصق هنا..." autofocus>
+    <div id="result" class="res">بانتظار الباركود...</div>
+
+    <script>
+        // هنا تضع قائمة الـ 40 ألف قطعة
+        const inventory = [
+            {SKC: "ss2101080112568565", Cat: "Women Pants", Price: 16},
+            {SKC: "tee180403052", Cat: "Women T-Shirts", Price: 9}
+        ];
+
+        const input = document.getElementById('barcodeInput');
+        
+        input.addEventListener('input', function() {
+            const code = this.value.trim();
+            const item = inventory.find(i => i.SKC === code);
+            if (item) {
+                document.getElementById('result').innerHTML = `✅ ${item.Cat} <br> السعر: ${item.Price}$`;
+                this.value = ''; // يمسح الخانة فوراً للقطعة التالية
+            }
+        });
+    </script>
+</body>
+</html>
